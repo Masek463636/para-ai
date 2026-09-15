@@ -400,8 +400,10 @@ function nameForm(name,form){
 }
 function personalize(value){
  const input=String(value??"");
- return input.replace(/\[?\bPerson[\s_]*([AB])\b(?::(gen|dat|acc|ins|pre))?\]?/gi,(match,p,explicit,offset)=>{
+ return input.replace(/\[?\bPerson[\s_]*([AB])\b(?::(nom|gen|dat|acc|ins|pre))?\]?/gi,(match,p,explicit,offset)=>{
   let form=explicit?.toLowerCase();const before=input.slice(0,offset).toLowerCase(),after=input.slice(offset+match.length).toLowerCase();
+  // A model can accidentally reuse an oblique marker as the subject of a new sentence.
+  if(/(?:^|[.!?]\s*|\n\s*)$/.test(before)&&/^\s+(?:(?:чётко|четко|обычно|скорее|также|больше|сильнее)\s+)*(?:смотрит|ценит|хочет|мечтает|предпочитает|нуждается|ищет|стремится|ориентирован|готов|боится|считает|воспринимает|чувствует|выбирает|ждёт|ждет|планирует)(?=[\s,.!?;:]|$)/.test(after))form="nom";
   if(!form){
    if(/(?:^|[\s,;:—(])(?:для|у|от|без|ради|вместо|против|кроме|потребность|потребности|желание|попытки|поведение|поведения|реакция|реакцию|молчание|паузу|пауза|ожидания|границы|свободу|позиция|чувства|слова|ответы|способ)\s+$/.test(before))form="gen";
    else if(/(?:^|[\s,;:—(])к\s+$/.test(before))form="dat";

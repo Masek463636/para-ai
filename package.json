@@ -1,8 +1,11 @@
 {
   "name": "para-ai-v5",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "private": true,
   "engines": {
     "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.cjs"
   }
 }

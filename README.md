@@ -15,14 +15,14 @@ Node 20+ (production currently Node 24). No frontend build or dependencies.
 - `index.html`: existing questionnaire, state, analysis orchestration and result journey.
 - `result.css`: mobile-first result, portraits, metric sheet, Council and paywall styles.
 - `api/analyze.js`: server-side Gemini request, schema validation and index calculation.
-- `vercel.json`: no-store API headers and 120-second maximum function duration.
+- `vercel.json`: no-store API headers and 180-second maximum function duration.
 - `tests/analyze.test.cjs`: dependency-free regression checks with mocked upstream responses.
 
 ## AI and privacy
 
 The existing model remains `gemini-3.1-flash-lite`. `GEMINI_API_KEY` stays in Vercel environment variables and is sent upstream only in a server request header. Never put it in the client, repository or logs. Logs contain status and completion markers, not answers or upstream bodies.
 
-The frontend sends the 15 question texts and both answer texts as Person A/B. It does not send name/date fields. Exact occurrences of entered names in free answers are replaced; arbitrary personal data typed into answers cannot be guaranteed anonymous. The form explains this. All AI output is escaped and Person A/B is replaced at rendering time with local names.
+The frontend sends the 15 question texts and both answer texts as Person A/B. It does not send name/date fields. Exact occurrences of entered names in free answers are replaced; arbitrary personal data typed into answers cannot be guaranteed anonymous. The form explains this. All AI output is escaped and Person A/B is replaced at rendering time with local names. Optional grammatical case markers such as `[Person A:gen]` are resolved locally for supported Russian name endings; unknown names are preserved.
 
 Questionnaire content is untrusted data, never model instructions. Schema validation rejects incomplete outputs. Upstream failures and timeouts produce a safe 503 response; the client displays a clearly labelled fallback. Fallback uses only selected choices, gives no vulnerability score and does not compare free text by keyword similarity.
 

@@ -387,7 +387,18 @@ function closeMetric(){
  if(!$("#metricModal").classList.contains("open"))return;
  $("#metricModal").classList.remove("open");$("#metricModal").setAttribute("aria-hidden","true");document.querySelector("main").inert=false;document.body.style.overflow="";modalReturnFocus?.focus();
 }
-function personalize(value){return String(value??"").replace(/\bPerson[\s_]*([AB])\b/gi,(_,p)=>S.names[p.toUpperCase()==="A"?0:1]);}
+function nameForm(name,form){
+ if(!form||!/^[А-ЯЁа-яё]+$/.test(name))return name;
+ const lower=name.toLowerCase();let stem=name.slice(0,-1),forms;
+ if(lower.endsWith("ия"))forms={gen:stem+"и",dat:stem+"и",acc:stem+"ю",ins:stem+"ей",pre:stem+"и"};
+ else if(lower.endsWith("я"))forms={gen:stem+"и",dat:stem+"е",acc:stem+"ю",ins:stem+"ей",pre:stem+"е"};
+ else if(lower.endsWith("а"))forms={gen:stem+(/[гкхжчшщ]$/i.test(stem)?"и":"ы"),dat:stem+"е",acc:stem+"у",ins:stem+(/[жчшщц]$/i.test(stem)?"ей":"ой"),pre:stem+"е"};
+ else if(lower.endsWith("ий")){stem=name.slice(0,-2);forms={gen:stem+"ия",dat:stem+"ию",acc:stem+"ия",ins:stem+"ием",pre:stem+"ии"};}
+ else if(lower.endsWith("ей"))forms={gen:stem+"я",dat:stem+"ю",acc:stem+"я",ins:stem+"ем",pre:stem+"е"};
+ else if(["александр","максим","артём","артем","иван","роман","михаил","владимир","денис","никита","олег","андрей","дмитрий"].includes(lower))forms={gen:name+"а",dat:name+"у",acc:name+"а",ins:name+"ом",pre:name+"е"};
+ return forms?.[form]||name;
+}
+function personalize(value){return String(value??"").replace(/\[?\bPerson[\s_]*([AB])\b(?::(gen|dat|acc|ins|pre))?\]?/gi,(_,p,form)=>nameForm(S.names[p.toUpperCase()==="A"?0:1],form?.toLowerCase()));}
 function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function safeAI(value){return escapeHTML(personalize(value));}
 
@@ -423,8 +434,8 @@ $("#save").onclick=()=>{
  if(q.free){val=$("#free").value.trim();if(val.length<12)return toast("Напиши чуть подробнее — хотя бы одно нормальное предложение.");}
  else{if(S.sel===null)return toast("Выбери один вариант.");val=S.sel;}
  S.a[S.p][S.q]=val;$("#free").blur();$("#free").value="";$("#choices").innerHTML="";$("#qcard").style.display="none";$("#handoff").style.display="";
- if(S.p===0){$("#handoffTitle").textContent=`Передай устройство ${S.names[1]}`;$("#handoffText").textContent=`Ответ ${S.names[0]} скрыт. Теперь ${S.names[1]} отвечает на тот же вопрос.`}
- else if(S.q<14){$("#handoffTitle").textContent=`Вопрос ${S.q+1} завершён`;$("#handoffText").textContent=`Оба ответа сохранены. Передай устройство ${S.names[0]} для следующего вопроса.`}
+ if(S.p===0){$("#handoffTitle").textContent=`Теперь отвечает ${S.names[1]}`;$("#handoffText").textContent=`Предыдущий ответ скрыт. ${S.names[1]}, теперь твоя очередь ответить на тот же вопрос.`}
+ else if(S.q<14){$("#handoffTitle").textContent=`Вопрос ${S.q+1} завершён`;$("#handoffText").textContent=`Оба ответа сохранены. ${S.names[0]}, теперь твоя очередь: переходим к следующему вопросу.`}
  else{$("#handoffTitle").textContent="Готово";$("#handoffText").textContent="Теперь Gemini прочитает ваши ответы по смыслу, а PARA соберёт результат."}
 };
 $("#next").onclick=()=>{if(S.p===0){S.p=1;renderQ()}else if(S.q<14){S.p=0;S.q++;renderQ()}else{startAIAnalysis()}};
@@ -486,7 +497,7 @@ async function startAIAnalysis(){
  $("#skipCouncil").hidden=true;$("#aiDot").className="aiDot";$("#aiStatusText").textContent="Читаем ваши ответы — особенно то, что вы написали сами…";
  $(".council").innerHTML='<div class="waitingOrb" aria-hidden="true">✧</div><p class="waitingCopy">За каждым ответом — своя причина.<br>Попробуем услышать обе.</p>';
  $("#pulse").style.transition="none";$("#pulse").style.width="0%";requestAnimationFrame(()=>{$("#pulse").style.transition="width 80s ease-out";$("#pulse").style.width="85%"});
- const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),112000);
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),172000);
  const slow=setTimeout(()=>{if(run===analysisRun)$("#aiStatusText").textContent="Собираем подробные портреты и 12 разборов. Это может занять чуть больше минуты…"},20000);
  try{
   const res=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(buildAIPayload()),signal:controller.signal});
@@ -563,7 +574,7 @@ function renderResult(){
 
 Чтобы не приписывать вашим словам чужой смысл, PARA оставил свободные ответы без оценки. Доступные ниже портреты — ориентиры по кнопкам. Обсудите, какие из них узнаёте, а какие описывают вас не совсем точно.`);
  const h=ai?.highlights;
- const highlights=h?[["✦","Сильнейшая сторона пары",h.strongest,"wide"],["↔","Где вы понимаете друг друга без слов",h.wordless,""],["↯","Главный конфликт",h.mainConflict,""],["♡","Зелёный флаг пары",h.greenFlag,"green"],["⚑","Красный флаг пары",h.redFlag,"rose"],["01",`${S.names[0]}: что можно неверно понять в ${S.names[1]}`,h.misreadA,""],["02",`${S.names[1]}: что можно неверно понять в ${S.names[0]}`,h.misreadB,""],["↗","Кто скорее первый идёт мириться",h.reconciles,""],["∞","Кто сильнее нуждается в близости",h.needsCloseness,""],["♡","Как вы проявляете любовь",h.loveLanguages,"wide"]]:[["✦","Ваша опора",`По вариантам сильнее всего совпали ожидания в теме «${cats[strong[0]]}». Это ещё не оценка всей истории отношений.`,""],["↔","Тема для разговора",`Обсудите тему «${cats[weak[0]]}»: чего каждому хочется и что было бы удобным компромиссом?`,""]];
+ const highlights=h?[["✦","Сильнейшая сторона пары",h.strongest,"wide"],["↔","Где вы понимаете друг друга без слов",h.wordless,""],["↯","Главный конфликт",h.mainConflict,""],["♡","Зелёный флаг пары",h.greenFlag,"green"],["⚑","Красный флаг пары",h.redFlag,"rose"],["01",`${S.names[0]} → ${S.names[1]}: где легко ошибиться`,h.misreadA,""],["02",`${S.names[1]} → ${S.names[0]}: где легко ошибиться`,h.misreadB,""],["↗","Кто скорее первый идёт мириться",h.reconciles,""],["∞","Кто сильнее нуждается в близости",h.needsCloseness,""],["♡","Как вы проявляете любовь",h.loveLanguages,"wide"]]:[["✦","Ваша опора",`По вариантам сильнее всего совпали ожидания в теме «${cats[strong[0]]}». Это ещё не оценка всей истории отношений.`,""],["↔","Тема для разговора",`Обсудите тему «${cats[weak[0]]}»: чего каждому хочется и что было бы удобным компромиссом?`,""]];
  $("#highlights").innerHTML=highlights.map(([icon,title,text,cls])=>`<article class="insight ${cls} reveal"><span class="insightIcon" aria-hidden="true">${icon}</span><h3>${escapeHTML(title)}</h3><p>${safeAI(text)}</p></article>`).join("");
  $("#peoplePortraits").innerHTML=S.names.map((name,i)=>{
  const profile=ai?.profiles?.[i===0?"personA":"personB"];

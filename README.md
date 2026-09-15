@@ -28,6 +28,8 @@ Questionnaire content is untrusted data, never model instructions. Schema valida
 
 ## Analysis contract
 
+Generation uses one base request and two parallel requests for six metric narratives each, all with the same existing Gemini model and server-only key. A shared timeout and abort signal bound the three calls.
+
 Version 6 includes two profiles with ten themes each; twelve metric narratives with seven sections each; couple story and highlights; semantic analysis of the three free-response pairs; eleven premium sections including a seven-day plan; six or seven Council lines. Council is a Gemini-generated scene with characters, not separate ChatGPT/Grok calls.
 
 All metric scores represent compatibility, including the legacy `risk` key which means vulnerability compatibility. Scoring bands: 85–100 / 70–84 / 55–69 / 40–54 / 0–39. These are product indices, not validated psychometric measures.

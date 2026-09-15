@@ -398,7 +398,21 @@ function nameForm(name,form){
  else if(["александр","максим","артём","артем","иван","роман","михаил","владимир","денис","никита","олег","андрей","дмитрий"].includes(lower))forms={gen:name+"а",dat:name+"у",acc:name+"а",ins:name+"ом",pre:name+"е"};
  return forms?.[form]||name;
 }
-function personalize(value){return String(value??"").replace(/\[?\bPerson[\s_]*([AB])\b(?::(gen|dat|acc|ins|pre))?\]?/gi,(_,p,form)=>nameForm(S.names[p.toUpperCase()==="A"?0:1],form?.toLowerCase()));}
+function personalize(value){
+ const input=String(value??"");
+ return input.replace(/\[?\bPerson[\s_]*([AB])\b(?::(gen|dat|acc|ins|pre))?\]?/gi,(match,p,explicit,offset)=>{
+  let form=explicit?.toLowerCase();const before=input.slice(0,offset).toLowerCase(),after=input.slice(offset+match.length).toLowerCase();
+  if(!form){
+   if(/(?:^|[\s,;:—(])(?:для|у|от|без|ради|вместо|против|кроме|потребность|потребности|желание|попытки|поведение|поведения|реакция|реакцию|молчание|паузу|пауза|ожидания|границы|свободу|позиция|чувства|слова|ответы|способ)\s+$/.test(before))form="gen";
+   else if(/(?:^|[\s,;:—(])к\s+$/.test(before))form="dat";
+   else if(/(?:^|[\s,;:—(])(?:с|со)\s+$/.test(before))form="ins";
+   else if(/(?:^|[\s,;:—(])(?:о|об)\s+$/.test(before))form="pre";
+   else if(/(?:^|[\s,;:—(])(?:понять|понимать|услышать|поддержать|обнять|ранить|любить|уважать)\s+$/.test(before))form="acc";
+   else if(/^\s+(?:важно|нужно|хочется|необходимо|страшно|больно|легче|сложнее|тяжело|приятно)(?=[\s,.!?;:]|$)/.test(after))form="dat";
+  }
+  return nameForm(S.names[p.toUpperCase()==="A"?0:1],form);
+ });
+}
 function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function safeAI(value){return escapeHTML(personalize(value));}
 

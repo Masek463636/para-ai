@@ -25,6 +25,8 @@
  const metricKeys=Object.keys(cats);
  function similarity(q,a,b){if(a===b)return 96;const distance=Math.abs(q.o[a][1]-q.o[b][1]);if(['receive_care','give_care','repair','no_tonight','hidden_expectation'].includes(q.id))return distance<=1?84:72;return [96,82,66,48][distance]||66;}
  function calculate(answers){const qScores=Q.map((q,i)=>q.free?null:similarity(q,answers[0][i],answers[1][i]));const c={};for(const key of metricKeys){let total=0,weight=0;Q.forEach((q,i)=>{if(q.free||!q.signals[key])return;total+=qScores[i]*q.signals[key];weight+=q.signals[key];});c[key]=weight?Math.round(total/weight):null;}
+ // An explicit want/no-children contradiction must not disappear in an average.
+ if([answers[0][10],answers[1][10]].sort().join(',')==='0,3'){c.future=Math.min(c.future,40);c.values=Math.min(c.values,65);}
  // Receiving and giving care are complementary, not simply identical preferences.
  const complement=(similarity(Q[5],answers[0][5],answers[1][6])+similarity(Q[5],answers[1][5],answers[0][6]))/2;c.support=Math.round((c.support+complement)/2);
  const vals=Object.values(c).filter(v=>v!==null),average=a=>a.reduce((s,v)=>s+v,0)/a.length;

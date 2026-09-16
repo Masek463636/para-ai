@@ -15,6 +15,7 @@ module.exports=async function handler(req,res){
   const selections=[req.body.answers.map(a=>a.personA),req.body.answers.map(a=>a.personB)];const baseline=calculate(selections).c;
   base=await A.generateStructured(apiKey,A.makePrompt(answers,months,baseline)+'\nСейчас НЕ генерируй metricNarratives: для них будут два отдельных подробных запроса.',A.BASE_SCHEMA,controller.signal);
   A.validateResult(base,A.BASE_SCHEMA);
+  if([selections[0][10],selections[1][10]].sort().join(',')==='0,3'){base.metrics.future=Math.min(base.metrics.future,40);base.metrics.values=Math.min(base.metrics.values,65);}
   Object.assign(base,A.calculateIndices(base.metrics,base.textSignals.severity),{analysisVersion:7});
   if(req.body.stream===true){res.setHeader('Content-Type','application/x-ndjson; charset=utf-8');res.setHeader('X-Accel-Buffering','no');started=true;emit('base',base);}
   const batches=await Promise.all([A.METRIC_KEYS.slice(0,6),A.METRIC_KEYS.slice(6)].map(keys=>A.generateStructured(apiKey,A.metricPrompt(answers,keys,base.metrics)+`\nПара вместе примерно ${months} месяцев. Не делай выводы только по стажу.`,{type:'object',properties:Object.fromEntries(keys.map(k=>[k,A.narrative])),required:keys},controller.signal)));

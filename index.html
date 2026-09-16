@@ -110,9 +110,9 @@ textarea{min-height:135px;resize:vertical;line-height:1.48}
 
 <section id="start" class="screen active">
   <div class="hero">
-    <span class="eyebrow">15 вопросов · для двоих</span>
+    <span class="eyebrow">18 вопросов · для двоих</span>
     <h1><span class="grad">Насколько вы<br>подходите друг другу?</span></h1>
-    <p class="lead">Вы отвечаете по очереди. PARA сравнивает ваши взгляды, стиль отношений, планы, эмоциональную совместимость и несколько развлекательных нумерологических показателей.</p>
+    <p class="lead">Вы отвечаете по очереди. PARA сравнивает ваши взгляды, стиль отношений, планы, эмоциональную совместимость то, что обычно остаётся между строк.</p>
   </div>
   <div class="card start">
     <div class="grid2">
@@ -121,6 +121,7 @@ textarea{min-height:135px;resize:vertical;line-height:1.48}
       <div><label for="n2">Имя второго человека</label><input id="n2" placeholder="Аня" maxlength="24"/></div>
       <div><label for="d2">Дата рождения второго человека</label><input id="d2" type="date"/></div>
     </div>
+    <div class="durationField"><label for="relationshipStart">Когда вы начали встречаться?</label><input id="relationshipStart" type="month"/><label class="checkLabel"><input id="durationApprox" type="checkbox" checked/> Примерно — точный день не нужен</label><p class="privacyNote">Gemini получит только примерное количество месяцев вместе.</p></div>
     <button id="startBtn" class="primary full">Начать тест</button>
     <div class="note">Нумерология и знаки зодиака — развлекательная часть результата, не научная диагностика.</div><p class="privacyNote">PARA использует Gemini для смыслового анализа ответов. Имена из полей и даты рождения остаются в браузере. Не пишите в ответах контакты и другие личные данные.</p>
   </div>
@@ -162,7 +163,7 @@ textarea{min-height:135px;resize:vertical;line-height:1.48}
 
 <section id="results" class="screen">
 <div class="results">
- <nav class="journeyNav" aria-label="Главы результата"><a href="#story">Вы</a><a href="#portraits">Портреты</a><a href="#map">12 граней</a><a href="#riskChapter">Риск</a><a href="#symbols">Магия</a></nav>
+ <nav class="journeyNav" aria-label="Главы результата"><a href="#story">Вы</a><a href="#portraits">Портреты</a><a href="#map">12 граней</a><a href="#riskChapter">Риск</a><a href="#coach">Coach</a></nav>
  <section class="card resultHero reveal" id="story">
   <span class="eyebrow">ВАША ИСТОРИЯ · PARA AI</span>
   <div class="pairNames" id="pairNames"></div>
@@ -174,15 +175,20 @@ textarea{min-height:135px;resize:vertical;line-height:1.48}
   <a href="#between" class="storyLink">Что стоит за вашими ответами <span>↓</span></a>
  </section>
  <section id="between" class="card portrait reveal"><span class="chapterLabel">01 / ВАША ДИНАМИКА</span><span class="portraitBadge" id="portraitBadge">Gemini-анализ</span><h2>Что происходит<br><span class="grad">между вами.</span></h2><div class="portraitSummary" id="coupleSummary"></div></section>
+ <section id="superpower" class="superpower reveal"></section>
  <div class="highlights" id="highlights"></div>
- <section id="portraits" class="chapter reveal"><span class="chapterLabel">02 / БЛИЖЕ, ЧЕМ КАЖЕТСЯ</span><h2>Два человека.<br><span class="grad">Два способа любить.</span></h2><p class="chapterIntro">За похожими словами могут стоять разные потребности. Откройте каждую тему — здесь важны детали.</p><div class="peoplePortraits" id="peoplePortraits"></div></section>
- <section id="map" class="chapter reveal"><span class="chapterLabel">03 / КАРТА ВАШЕЙ ПАРЫ</span><h2>У любви больше<br><span class="grad">одного измерения.</span></h2><p class="chapterIntro">Нажмите на любую из 12 граней: два портрета, ваша динамика и конкретный шаг навстречу.</p><div class="metrics" id="metrics"></div><details class="scoreLegend"><summary>Как читать проценты?</summary><p>85–100 — очень сильное совпадение<br>70–84 — хорошее совпадение<br>55–69 — заметные, но нормальные различия<br>40–54 — серьёзная тема для разговора<br>0–39 — сильное противоречие</p><p>Это индексы по анкете. Они не измеряют любовь и не определяют судьбу пары.</p></details></section>
- <section class="card textChapter reveal" id="yourWords"><span class="chapterLabel">04 / ВАШИМИ СЛОВАМИ</span><h2>То, чего нет<br><span class="grad">в вариантах ответа.</span></h2><p class="chapterIntro">Ваша идеальная жизнь. То, что ранит. Ваша точка невозврата.</p><div id="textInsights"></div></section>
+ <section id="portraits" class="chapter reveal"><span class="chapterLabel">02 / БЛИЖЕ, ЧЕМ КАЖЕТСЯ</span><h2>Два человека.<br><span class="grad">Два способа любить.</span></h2><p class="chapterIntro">За похожими словами могут стоять разные потребности. Здесь — начало двух портретов. В полном отчёте — по 10 важных тем о каждом.</p><div class="peoplePortraits" id="peoplePortraits"></div></section>
+ <section id="misunderstandings" class="chapter reveal"></section>
+ <section id="cycle" class="chapter reveal"></section>
+ <section id="riskZone" class="chapter reveal"></section>
+ <section id="map" class="chapter reveal"><span class="chapterLabel">03 / КАРТА ВАШЕЙ ПАРЫ</span><h2>У любви больше<br><span class="grad">одного измерения.</span></h2><p class="chapterIntro">Нажмите на грань, чтобы увидеть начало разбора. Полные истории по каждой теме входят в Premium.</p><div class="metrics" id="metrics"></div><details class="scoreLegend"><summary>Как читать проценты?</summary><p>85–100 — очень сильное совпадение<br>70–84 — хорошее совпадение<br>55–69 — заметные, но нормальные различия<br>40–54 — серьёзная тема для разговора<br>0–39 — сильное противоречие</p><p>Это индексы по анкете. Они не измеряют любовь и не определяют судьбу пары.</p></details></section>
  <section class="card risk reveal" id="riskChapter"><div class="riskContent"><span class="chapterLabel">05 / САМОЕ ЧУВСТВИТЕЛЬНОЕ</span><h2>Риск расставания</h2><div class="riskNum"><span id="risk">0</span><small>%</small></div><p class="riskFoot">Индекс PARA по вашим ответам, а не научный прогноз будущего.</p><div class="riskTrack"><i id="riskFill"></i></div><p id="riskText"></p><div class="riskZones" id="riskZones"></div><p class="riskMethod" id="riskMethod"></p></div></section>
- <section class="card premium reveal"><div class="premiumTop"><span class="eyebrow">PARA DEEP · ПЕРСОНАЛЬНЫЙ РАЗБОР</span><span class="premiumStar" aria-hidden="true">✧</span></div><div class="locked" id="locked"><div class="lockbox"><div class="lockIcon" aria-hidden="true">🔐</div><h2 id="lockedRiskTitle">Почему именно —%?</h2><p id="lockedRiskSub"></p></div><div class="premiumTeasers"><span>01 <b>Главный триггер</b> ↗</span><span>02 <b>Сценарий отдаления</b> ↗</span><span>03 <b>То, о чём вы молчите</b> ↗</span><span>04 <b>Разговор + 7 дней</b> ↗</span></div><p class="premiumIncludes">Кто может закрыться первым · «очевидные» ожидания каждого · взаимные недопонимания · повторяющийся конфликт</p><button id="pay" class="primary full">Узнать причину — $1.99</button><p class="paymentNote">Один раз · без подписки · оплата скоро</p><div id="paymentNotice" class="paymentNotice" hidden role="status"><b>Оплата пока не открыта</b><p>Сейчас купить разбор нельзя. Деньги не списываются. Уже доступные 12 граней помогут начать разговор сегодня.</p><a href="#map">Вернуться к бесплатному разбору ↑</a></div></div></section>
+ <section id="deepReport" class="chapter reveal"><span class="chapterLabel">PARA DEEP / МЕЖДУ СТРОК</span><h2>Ваша история<br><span class="grad">гораздо глубже.</span></h2><p id="deepCount" class="chapterIntro"></p><p id="detailStatus" class="detailStatus" role="status"></p><div id="premiumPreview"></div></section>
+ <section id="paywall" class="card premium reveal"><div class="premiumTop"><span class="eyebrow">ПОЛНЫЙ РАЗБОР ВАШЕЙ ПАРЫ</span><span class="premiumStar" aria-hidden="true">✧</span></div><div class="lockbox"><div class="lockIcon">🔐</div><h2 id="lockedRiskTitle"></h2><p>Не просто цифра. Ваши ожидания, возможный цикл отдаления и конкретные слова, с которых можно начать разговор.</p><div class="price">$1.99</div></div><div class="premiumTeasers"><span>01 <b>Цикл и зона риска</b> ↗</span><span>02 <b>12 полных разборов</b> ↗</span><span>03 <b>Разговор + 7 дней</b> ↗</span><span>04 <b>Продолжение с Coach</b> ↗</span></div><p class="premiumIncludes">Два полных портрета · непроговорённые ожидания · взаимные недопонимания · причины индекса риска</p><button id="pay" class="primary full">Полный разбор — $1.99</button><p class="paymentNote">Один отчёт · без подписки · покупка пока недоступна</p><div id="paymentNotice" class="paymentNotice" hidden role="status"><b>Оплата пока не открыта</b><p>Списаний нет. Сейчас можно бесплатно задать один вопрос PARA Coach по готовому разбору.</p><a href="#coach">Спросить PARA ↓</a></div></section>
+ <section id="coach" class="card coach reveal"><span class="chapterLabel">PARA COACH / РАЗГОВОР ПРО ВАС</span><h2>А теперь<br><span class="grad">твой вопрос.</span></h2><p class="chapterIntro">PARA помнит контекст этой пары. Один вопрос бесплатно — о том, что хочется понять глубже.</p><div id="coachMessages" class="coachMessages" aria-live="polite"></div><form id="coachForm"><label for="coachQuestion">Спроси PARA о вашей паре</label><textarea id="coachQuestion" maxlength="700" rows="3" placeholder="Почему мы так по-разному реагируем на паузу после ссоры?"></textarea><p class="privacyNote">Называй партнёра введённым именем. Не указывай контакты и чужие личные данные.</p><button id="coachSend" class="primary full" type="submit">Задать бесплатный вопрос</button></form><p id="coachStatus" class="detailStatus" role="status"></p><div id="coachLock" hidden><p>PARA знает контекст вашей пары.</p><a class="premiumLink" href="#paywall">🔒 Продолжить разговор с PARA · Premium $1.99</a><p class="paymentNote">Покупка пока недоступна. Планируем 8 дополнительных сообщений на один отчёт.</p></div></section>
  <section class="chapter symbolic reveal" id="symbols"><span class="chapterLabel">БОНУС / НЕМНОГО МАГИИ</span><h2>А если это<br><span class="grad">знаки?</span></h2><p class="chapterIntro">Только для развлечения. Знаки и числа не влияют на AI-портреты, совместимость по ответам и индекс риска.</p><div class="mystic" id="mystic"></div><div class="symbolStory" id="symbolStory"></div></section>
- <div class="actions"><button id="copy" class="primary">Сохранить в пару строк ↗</button><button id="restart" class="secondary">Пройти заново</button></div>
- <div class="footer">Вы больше, чем результат теста.<br>PARA — повод услышать друг друга. Не диагноз и не предсказание.</div>
+ <div class="actions"><button id="copy" class="primary">Сохранить в пару строк ↗</button><button id="restart" class="secondary">Удалить результат / пройти заново</button></div>
+ <p id="storageNote" class="privacyNote"></p><button id="retryAnalysis" class="secondary full" hidden>Повторить смысловой анализ</button><div class="footer">Вы больше, чем результат теста.<br>PARA — повод услышать друг друга. Не диагноз и не предсказание.</div>
 </div>
 </section>
 </main>
@@ -196,433 +202,13 @@ textarea{min-height:135px;resize:vertical;line-height:1.48}
     <div class="metricBig" id="metricScore">0%</div>
     <div class="mbar" style="height:9px;margin-top:8px"><div class="mfill" id="metricModalFill" style="width:0%"></div></div>
     <div class="metricDesc" id="metricDesc"></div>
-    <div class="metricExplain" id="metricExplain"></div>
+    <div class="metricExplain" id="metricExplain"></div><button id="metricPremium" class="primary full">Полный разбор — $1.99</button>
   </div>
 </div>
 
 <div id="toast" class="toast" role="status"></div>
 
-<script>
-
-
-const Q=[
-{t:"Сколько личного пространства тебе нужно?",h:"Выбери вариант, который ближе всего.",cat:"boundaries",o:[
-["Почти всё свободное время хочу быть вместе",1],["Люблю много времени вместе, но иногда нужно побыть одному",2],["Мне нужен хороший баланс 50/50",3],["Мне важно много личного времени",4]]},
-{t:"Как лучше решать серьёзную ссору?",h:"Представь реальный конфликт, а не идеальный.",cat:"communication",o:[
-["Обсудить сразу, пока всё свежее",1],["Сначала остыть 30–60 минут, потом говорить",2],["Взять паузу до следующего дня",3],["Мне проще вообще закрыться и не обсуждать",4]]},
-{t:"Что для тебя считается изменой?",h:"Где начинается красная линия?",cat:"trust",o:[
-["Только физическая близость",1],["Поцелуй или откровенный флирт тоже измена",2],["Скрытая эмоциональная связь тоже измена",3],["Даже тайная романтическая переписка — уже измена",4]]},
-{t:"Насколько ты ревнив(а)?",h:"Как ты ведёшь себя, когда чувствуешь угрозу отношениям?",cat:"jealousy",o:[
-["Почти не ревную",1],["Иногда ревную, но не контролирую",2],["Могу проверять детали и задавать много вопросов",3],["Мне тяжело не контролировать ситуацию",4]]},
-{t:"Как ты видишь отношения через 3–5 лет?",h:"Главный жизненный вектор.",cat:"future",o:[
-["Хочу стабильную семью и совместный быт",1],["Хочу быть вместе, но без жёсткого плана",2],["Сначала карьера/деньги, потом всё остальное",3],["Пока вообще не думаю так далеко",4]]},
-{t:"Как тебе комфортнее вести деньги в паре?",h:"Что кажется честным?",cat:"money",o:[
-["Почти полностью общий бюджет",1],["Общие обязательные траты + личные деньги",2],["Пополам по общим расходам, остальное раздельно",3],["Полностью раздельные деньги",4]]},
-{t:"Насколько для тебя важна физическая близость?",h:"Без подробностей — просто её роль в отношениях.",cat:"intimacy",o:[
-["Это одна из главных основ отношений",1],["Очень важна, но не важнее доверия и заботы",2],["Важна, но могу спокойно жить без неё периодами",3],["Для меня это не особенно важная часть",4]]},
-{t:"Как часто вам нужно качественное время только вдвоём?",h:"Без друзей, работы и телефона.",cat:"closeness",o:[
-["Почти каждый день",1],["Несколько раз в неделю",2],["Раз в неделю достаточно",3],["Мне не нужно много отдельного времени вдвоём",4]]},
-{t:"Какую роль должны играть родители и друзья?",h:"Насколько им можно вмешиваться?",cat:"boundaries",o:[
-["Мы можем сильно учитывать их мнение",1],["Совет можно слушать, решение всё равно наше",2],["Только если мы сами попросили совета",3],["Они вообще не должны влиять на решения пары",4]]},
-{t:"Что важнее в тяжёлый момент?",h:"Какой поддержки ты ждёшь?",cat:"support",o:[
-["Обнять и просто быть рядом",1],["Спокойно выслушать меня",2],["Помочь решить проблему конкретными действиями",3],["Дать мне пространство и не трогать некоторое время",4]]},
-{t:"Насколько тебе важно обсуждать всё честно?",h:"Даже если правда может привести к ссоре.",cat:"honesty",o:[
-["Лучше неприятная правда сразу",1],["Правду надо говорить, но мягко и не всегда сразу",2],["Иногда лучше промолчать ради спокойствия",3],["Некоторые вещи партнёру знать не обязательно",4]]},
-{t:"Что для тебя самое важное в отношениях?",h:"Выбери главный приоритет.",cat:"values",o:[
-["Любовь и эмоциональная близость",1],["Доверие и честность",2],["Стабильность и надёжность",3],["Свобода и уважение границ",4]]},
-{t:"Как выглядит идеальная жизнь вашей пары?",h:"Опиши своими словами. Это один из трёх вопросов без вариантов.",cat:"future",free:true},
-{t:"Какая вещь в поведении партнёра могла бы ранить тебя сильнее всего?",h:"Пиши конкретно: игнор, ложь, холодность, контроль, обесценивание и т.д.",cat:"risk",free:true},
-{t:"Из-за чего ваша пара реально могла бы расстаться?",h:"Не красивый ответ, а то, чего ты действительно опасаешься.",cat:"risk",free:true}
-];
-
-const cats={
-closeness:"Близость",communication:"Общение",trust:"Доверие",jealousy:"Ревность",
-future:"Будущее",money:"Деньги",intimacy:"Физическая близость",boundaries:"Границы",
-support:"Поддержка",honesty:"Честность",values:"Ценности",risk:"Уязвимость"
-};
-
-const metricInfo={
- closeness:{d:"Эта метрика не про то, насколько сильно вы любите друг друга. Она про ритм контакта: сколько совместного времени нужно каждому, чтобы чувствовать связь, а не давление или нехватку внимания."},
- communication:{d:"Здесь PARA смотрит на то, что происходит именно в момент напряжения: хочется ли говорить сразу, нужна ли пауза и насколько легко человек возвращается к неприятной теме."},
- trust:{d:"Доверие здесь — это прежде всего совпадение границ. Два очень честных человека всё равно могут постоянно ранить друг друга, если один считает флирт безобидным, а для второго это уже нарушение верности."},
- jealousy:{d:"Ревность показывает не «кто токсичный», а как человек реагирует на неопределённость. Кто-то быстро успокаивается, кому-то нужны подтверждения, а кто-то пытается вернуть безопасность через контроль."},
- future:{d:"Одна из самых тяжёлых метрик: здесь встречаются образ жизни, семья, карьера, дом, дети и сроки. Даже очень тёплая пара может упереться в то, что любит друг друга, но строит разные маршруты."},
- money:{d:"Деньги в отношениях часто означают больше, чем деньги: справедливость, независимость, безопасность и власть принимать решения. Поэтому небольшая разница в финансовых правилах иногда ощущается сильнее, чем кажется."},
- intimacy:{d:"Физическая близость — это не соревнование по частоте. PARA сравнивает, насколько одинаковое место она занимает в картине отношений каждого человека."},
- boundaries:{d:"Границы — это баланс между «мы» и «я»: личное время, друзья, семья, телефон, автономность и право иногда выбирать себя, не разрушая ощущение пары."},
- support:{d:"Люди часто дают партнёру ту помощь, которую хотели бы получить сами. Но одному нужны объятия, другому решение проблемы, третьему — чтобы его вообще час не трогали. Здесь важно именно совпадение языка поддержки."},
- honesty:{d:"Эта метрика про конфликт между правдой и спокойствием. Насколько каждый готов говорить неприятное прямо, что считает допустимой недосказанностью и где начинается ощущение скрытности."},
- values:{d:"Ценности — это внутренний ответ на вопрос «ради чего вообще нужны отношения?». Любовь, доверие, стабильность и свобода могут быть важны обоим, но в момент выбора люди обычно ставят что-то одно выше."},
- risk:{d:"Уязвимость показывает не «кто слабее», а какие события каждый считает реально опасными для отношений. Особенно важно, видят ли партнёры одну и ту же угрозу или каждый боится совершенно разного сценария."}
-};
-
-function scoreBand(v){return v>=85?"hi":v>=55?"mid":"lo"}
-
-function optionProfile(cat, person){
- const get=i=>S.a[person][i];
- const who=S.names[person];
-
- const maps={
-   closeness:[
-     `${who} получает чувство связи через частый контакт. Для него/неё отношения ощущаются живыми, когда у пары регулярно есть своё время без лишних людей и отвлечений.`,
-     `${who} любит заметное количество времени вдвоём, но не требует постоянного присутствия. Близость для него/неё — регулярный контакт, после которого всё ещё остаётся пространство для собственной жизни.`,
-     `${who} довольно автономен(на): совместное время важно, но его не обязательно должно быть много. Качество контакта для него/неё обычно важнее количества часов рядом.`,
-     `${who} легко сохраняет чувство отношений даже при большой доле отдельной жизни. Избыточное требование быть постоянно рядом может ощущаться скорее как давление, чем как любовь.`
-   ],
-   communication:[
-     `${who} тянется к немедленному прояснению. Неопределённость после ссоры может нервировать сильнее самой ссоры, поэтому хочется быстро назвать проблему и понять, что происходит.`,
-     `${who} умеет выдержать короткую паузу, но не любит подвешенные конфликты. Лучший сценарий — чуть остыть и всё-таки вернуться к разговору в тот же день.`,
-     `${who} восстанавливается медленнее и предпочитает сначала вернуть себе спокойствие. Давление «говори прямо сейчас» способно ухудшить разговор даже при хорошем намерении.`,
-     `${who} склонен(на) закрываться, когда напряжение становится слишком сильным. Это не обязательно безразличие: иногда дистанция — способ не сказать лишнего, но партнёр может прочитать её как холодность.`
-   ],
-   trust:[
-     `${who} проводит границу верности в основном вокруг физической измены. Некоторые формы флирта или эмоционального контакта могут восприниматься мягче, чем партнёром.`,
-     `${who} довольно чувствителен(на) к романтическому флирту и физическим жестам. Верность для него/неё начинается раньше, чем непосредственно сексуальный контакт.`,
-     `${who} считает эмоциональную эксклюзивность почти такой же важной, как физическую. Тайная сильная связь с другим человеком может ранить не меньше поцелуя.`,
-     `${who} ставит очень строгую границу вокруг скрытых романтических переписок. Для него/неё сам факт тайного интимного контекста уже подрывает доверие.`
-   ],
-   jealousy:[
-     `${who} обычно не пытается контролировать неопределённость через ревность. Это даёт много свободы, хотя партнёру с более тревожным стилем иногда может не хватать явных подтверждений.`,
-     `${who} способен(на) ревновать, но обычно удерживает чувство внутри разумных границ. Скорее спросит или присмотрится, чем начнёт управлять поведением партнёра.`,
-     `${who} при угрозе отношениям начинает искать детали и подтверждения. Чем меньше ясности, тем сильнее желание проверить, что всё действительно в порядке.`,
-     `${who} переживает угрозу связи очень интенсивно. Контроль может казаться способом вернуть безопасность, хотя партнёр способен воспринимать его как недоверие.`
-   ],
-   money:[
-     `${who} видит пару как почти единую финансовую команду. Деньги для него/неё тесно связаны с общностью и совместной ответственностью.`,
-     `${who} любит модель «общее + своё»: базовые вещи принадлежат паре, но личная финансовая территория тоже остаётся.`,
-     `${who} сильнее ценит финансовую автономность. Справедливость ощущается как понятное разделение общих расходов без полного объединения денег.`,
-     `${who} предпочитает почти полностью независимые финансы. Контроль над собственными деньгами для него/неё — важная часть свободы.`
-   ],
-   intimacy:[
-     `${who} воспринимает физическую близость как один из главных способов чувствовать отношения живыми. Длительное её отсутствие может ощущаться эмоционально значимым.`,
-     `${who} придаёт физической близости большой вес, но ставит её рядом с доверием, заботой и эмоциональной связью, а не выше всего остального.`,
-     `${who} ценит физическую близость, однако способен(на) спокойно переживать периоды, когда её меньше. Это не обязательно воспринимается как сигнал проблем.`,
-     `${who} строит ощущение отношений в основном на других формах связи. Физическая сторона для него/неё не является центральным доказательством любви.`
-   ],
-   support:[
-     `${who} в тяжёлый момент прежде всего хочет почувствовать присутствие: объятия, тепло и ощущение «я рядом». Решение проблемы может быть вторичным.`,
-     `${who} больше всего нуждается в внимательном слушании. Для него/неё важно сначала быть понятым(ой), а уже потом что-либо исправлять.`,
-     `${who} воспринимает поддержку через действие. Когда плохо, конкретная помощь и совместное решение проблемы звучат убедительнее красивых слов.`,
-     `${who} в стрессе восстанавливается через пространство. Даже заботливое внимание может перегружать, если его слишком много в первые минуты.`
-   ],
-   honesty:[
-     `${who} предпочитает неприятную ясность неопределённости. Правда может ранить, но ощущение, что от него/неё что-то скрывают, обычно ранит сильнее.`,
-     `${who} за честность, но большое значение придаёт форме и моменту. Для него/неё сказать правду правильно почти так же важно, как сказать её вообще.`,
-     `${who} иногда ставит сохранение спокойствия выше полной прозрачности. В некоторых ситуациях молчание воспринимается как способ не причинять лишнюю боль.`,
-     `${who} оставляет заметную личную зону, которую не считает обязательным раскрывать партнёру. Для более прозрачного партнёра это может ощущаться загадочно или тревожно.`
-   ],
-   values:[
-     `${who} в центре отношений ставит чувство любви и эмоциональной близости. В кризисе главным вопросом становится «мы всё ещё рядом друг с другом?».`,
-     `${who} делает основой доверие и честность. Даже сильные чувства мало успокаивают, если появляется сомнение в прозрачности отношений.`,
-     `${who} сильнее ориентирован(а) на надёжность, предсказуемость и ощущение общего фундамента. Любовь должна проявляться в стабильных действиях.`,
-     `${who} особенно ценит свободу и уважение личности внутри пары. Хорошие отношения не должны стирать собственную жизнь каждого.`
-   ]
- };
- const idxMap={closeness:7,communication:1,trust:2,jealousy:3,money:5,intimacy:6,support:9,honesty:10,values:11};
- const idx=idxMap[cat];
- return idx===undefined ? "" : maps[cat][get(idx)] || "";
-}
-
-function boundaryProfile(person){
- const who=S.names[person],space=S.a[person][0],family=S.a[person][8];
- const spaceCopy=[
-  "любит очень плотное ощущение «мы» и легко включает партнёра почти во всё свободное время",
-  "ценит частый контакт, но периодически нуждается в своей территории",
-  "старается держать заметный баланс между парой и отдельной жизнью",
-  "сильно ценит автономность и нуждается в большом количестве личного пространства"
- ][space]||"";
- const famCopy=[
-  "готов(а) довольно сильно учитывать мнение семьи и друзей",
-  "готов(а) слушать близких, но финальное решение оставляет паре",
-  "предпочитает подключать близких только по просьбе самой пары",
-  "проводит жёсткую линию: решения пары должны оставаться только внутри пары"
- ][family]||"";
- return `${who} ${spaceCopy}. При этом ${famCopy}. В сумме это описывает не «правильные» или «неправильные» границы, а то, насколько широко ${who} открывает отношения внешнему миру и сколько отдельной жизни хочет сохранить внутри пары.`;
-}
-function futureProfile(person){
- const who=S.names[person],idx=S.a[person][4];
- const base=[
-  `${who} мыслит отношениями достаточно далеко вперёд и тянется к понятной стабильной конструкции: совместная жизнь должна постепенно превращаться в общий проект.`,
-  `${who} хочет сохранять отношения и общий путь, но не любит слишком рано превращать любовь в жёсткий пятилетний план.`,
-  `${who} сейчас сильнее ориентирован(а) на карьеру, деньги или создание собственной опоры. Отношения важны, но не должны съесть другие жизненные задачи.`,
-  `${who} живёт отношениями больше в настоящем, чем в далёком будущем. Слишком ранние обещания и сценарии на годы вперёд могут ощущаться искусственными.`
- ][idx]||`${who} пока не даёт однозначного долгосрочного сигнала.`;
- return base+" Это ориентир по варианту ответа. Свободное описание будущего без Gemini не оценено.";
-}
-function riskProfile(person){return `${S.names[person]}: свободные ответы о том, что ранит и из-за чего можно расстаться, пока не оценены. PARA не будет подменять их смысл совпадением слов.`;}
-function personMetricNarrative(cat,person){
- if(cat==="boundaries")return boundaryProfile(person);
- if(cat==="future")return futureProfile(person);
- if(cat==="risk")return riskProfile(person);
- return optionProfile(cat,person);
-}
-function coupleNarrative(cat,v){
- const a=S.names[0],b=S.names[1],band=scoreBand(v);
- const noun=cats[cat].toLowerCase();
- if(band==="hi")return `${v}% здесь означает не просто «вы нажали похожие кнопки». В теме «${noun}» ${a} и ${b} ожидают от отношений очень похожую внутреннюю логику. Благодаря этому многие действия партнёра будут считываться естественно: меньше ситуаций, когда один проявляет любовь, а второй почему-то воспринимает то же действие как холодность, давление или равнодушие. Но высокий процент не делает тему неуязвимой — он лишь говорит, что вам проще начать разговор с общей точки.`;
- if(band==="mid")return `${v}% — это зона, где ${a} и ${b} в целом способны понять друг друга, но делают это не автоматически. У вас есть общая база, а различия проявляются уже в деталях: количестве, сроках, интенсивности или способе выражения потребности. Именно такие темы часто выглядят безобидно в начале, а потом повторяются в бытовых ситуациях. Сильная сторона здесь в том, что различие достаточно конкретное: его можно превратить в правило, а не в бесконечное «ты меня не понимаешь».`;
- return `${v}% — заметное расхождение. Это не означает, что ${a} и ${b} «плохая пара»: скорее в теме «${noun}» каждый действует из своей логики и может искренне не понимать, почему партнёру больно или неудобно. Самая опасная ошибка — считать собственную норму универсальной. Для этой зоны особенно важно не угадывать желания друг друга, а буквально назвать их словами и договориться, какое поведение будет считаться заботой, а какое — нарушением границы.`;
-}
-function scoreMeaning(v){return v>=85?"Очень сильное совпадение ожиданий.":v>=70?"Хорошее совпадение с отдельными различиями.":v>=55?"Заметные, но нормальные различия: есть о чём договориться.":v>=40?"Серьёзная тема для спокойного разговора.":"Сильное противоречие в ответах. Это не приговор отношениям.";}
-let modalReturnFocus=null;
-function openMetric(k,v){
- if(!cats[k])return;
- modalReturnFocus=document.activeElement;
- $("#metricTitle").textContent=cats[k];$("#metricScore").textContent=v==null?"Пока без оценки":v+"%";
- $("#metricModalFill").style.width=(v??0)+"%";$("#metricDesc").textContent=metricInfo[k].d;
- const n=S.ai?.metricNarratives?.[k];
- const rows=[
- [S.names[0]+" — как устроена эта тема",n?.personA||personMetricNarrative(k,0)],
- [S.names[1]+" — как устроена эта тема",n?.personB||personMetricNarrative(k,1)],
- ["Что происходит между вами",n?.together||(v==null?"Без смыслового анализа нельзя оценить, как сочетаются ваши свободные ответы. Разные слова могут описывать одну потребность, а одинаковые — противоположные планы.":coupleNarrative(k,v))],
- [v==null?"Почему здесь нет процента":"Почему получилось "+v+"%",n?.meaning||(v==null?"Gemini недоступен. PARA не оценивает смысл текста по совпадению слов.":scoreMeaning(v)+" Резервная оценка учитывает только выбранные варианты.")],
- ["Что здесь хорошо",n?.good||"Вы уже назвали свои ожидания. Это отправная точка для разговора, а не необходимость угадывать."],
- ["Где может возникнуть проблема",n?.tension||"Если считать только свой способ отношений очевидным, можно не заметить другую потребность. Это общий ориентир, а не вывод о ваших текстах."],
- ["Что можно сделать",n?.action||"По очереди закончите фразу: «В этой теме мне важно…». Повторите услышанное своими словами и выберите одно правило, удобное обоим."]];
- $("#metricExplain").innerHTML=rows.map(([title,text],i)=>`<div class="explainRow ${i===6?'actionRow':''}"><b>${escapeHTML(title)}</b><span>${safeAI(text)}</span></div>`).join("");
- $("#metricModal").classList.add("open");$("#metricModal").setAttribute("aria-hidden","false");
- document.querySelector("main").inert=true;document.body.style.overflow="hidden";$(".metricSheet").scrollTop=0;$("#metricClose").focus();
-}
-function closeMetric(){
- if(!$("#metricModal").classList.contains("open"))return;
- $("#metricModal").classList.remove("open");$("#metricModal").setAttribute("aria-hidden","true");document.querySelector("main").inert=false;document.body.style.overflow="";modalReturnFocus?.focus();
-}
-function nameForm(name,form){
- if(!form||!/^[А-ЯЁа-яё]+$/.test(name))return name;
- const lower=name.toLowerCase();let stem=name.slice(0,-1),forms;
- if(lower.endsWith("ия"))forms={gen:stem+"и",dat:stem+"и",acc:stem+"ю",ins:stem+"ей",pre:stem+"и"};
- else if(lower.endsWith("я"))forms={gen:stem+"и",dat:stem+"е",acc:stem+"ю",ins:stem+"ей",pre:stem+"е"};
- else if(lower.endsWith("а"))forms={gen:stem+(/[гкхжчшщ]$/i.test(stem)?"и":"ы"),dat:stem+"е",acc:stem+"у",ins:stem+(/[жчшщц]$/i.test(stem)?"ей":"ой"),pre:stem+"е"};
- else if(lower.endsWith("ий")){stem=name.slice(0,-2);forms={gen:stem+"ия",dat:stem+"ию",acc:stem+"ия",ins:stem+"ием",pre:stem+"ии"};}
- else if(lower.endsWith("ей"))forms={gen:stem+"я",dat:stem+"ю",acc:stem+"я",ins:stem+"ем",pre:stem+"е"};
- else if(["александр","максим","артём","артем","иван","роман","михаил","владимир","денис","никита","олег","андрей","дмитрий"].includes(lower))forms={gen:name+"а",dat:name+"у",acc:name+"а",ins:name+"ом",pre:name+"е"};
- return forms?.[form]||name;
-}
-function personalize(value){
- const input=String(value??"");
- return input.replace(/\[?\bPerson[\s_]*([AB])\b(?::(nom|gen|dat|acc|ins|pre))?\]?/gi,(match,p,explicit,offset)=>{
-  let form=explicit?.toLowerCase();const before=input.slice(0,offset).toLowerCase(),after=input.slice(offset+match.length).toLowerCase();
-  // A model can accidentally reuse an oblique marker as the subject of a new sentence.
-  if(/(?:^|[.!?]\s*|\n\s*)$/.test(before)&&/^\s+(?:(?:чётко|четко|обычно|скорее|также|больше|сильнее)\s+)*(?:смотрит|ценит|хочет|мечтает|предпочитает|нуждается|ищет|стремится|ориентирован|готов|боится|считает|воспринимает|чувствует|выбирает|ждёт|ждет|планирует)(?=[\s,.!?;:]|$)/.test(after))form="nom";
-  if(!form){
-   if(/(?:^|[\s,;:—(])(?:для|у|от|без|ради|вместо|против|кроме|потребность|потребности|желание|попытки|поведение|поведения|реакция|реакцию|молчание|паузу|пауза|ожидания|границы|свободу|позиция|чувства|слова|ответы|способ)\s+$/.test(before))form="gen";
-   else if(/(?:^|[\s,;:—(])к\s+$/.test(before))form="dat";
-   else if(/(?:^|[\s,;:—(])(?:с|со)\s+$/.test(before))form="ins";
-   else if(/(?:^|[\s,;:—(])(?:о|об)\s+$/.test(before))form="pre";
-   else if(/(?:^|[\s,;:—(])(?:понять|понимать|услышать|поддержать|обнять|ранить|любить|уважать)\s+$/.test(before))form="acc";
-   else if(/^\s+(?:важно|нужно|хочется|необходимо|страшно|больно|легче|сложнее|тяжело|приятно)(?=[\s,.!?;:]|$)/.test(after))form="dat";
-  }
-  return nameForm(S.names[p.toUpperCase()==="A"?0:1],form);
- });
-}
-function escapeHTML(value){return String(value??"").replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function safeAI(value){return escapeHTML(personalize(value));}
-
-
-let S={names:["Человек 1","Человек 2"],dates:["",""],q:0,p:0,a:[Array(15).fill(null),Array(15).fill(null)],r:null,local:null,ai:null,sel:null};
-const $=s=>document.querySelector(s);
-function toast(x){let t=$("#toast");t.textContent=x;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
-function show(id){document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");window.scrollTo({top:0,behavior:"smooth"})}
-
-$("#startBtn").onclick=()=>{
- S.names=[$("#n1").value.trim()||"Человек 1",$("#n2").value.trim()||"Человек 2"];
- S.dates=[$("#d1").value,$("#d2").value];
- if(!S.dates[0]||!S.dates[1]) return toast("Добавь обе даты рождения — они нужны для развлекательной части.");
- const today=new Date().toISOString().slice(0,10);if(S.dates.some(d=>d>today||Number(d.slice(0,4))<1900))return toast("Проверь даты рождения: дата должна быть в прошлом, начиная с 1900 года.");
- S.q=0;S.p=0;S.a=[Array(15).fill(null),Array(15).fill(null)];show("#quiz");renderQ();
-};
-
-function renderQ(){
- const q=Q[S.q];S.sel=null;
- $("#progText").textContent=`Вопрос ${S.q+1} из 15`;$("#person").textContent=S.names[S.p];
- $("#fill").style.width=((S.q*2+S.p)/30*100)+"%";
- $("#who").textContent="Отвечает: "+S.names[S.p];$("#qtext").textContent=q.t;$("#qhint").textContent=q.h;
- $("#handoff").style.display="none";$("#qcard").style.display="";
- const ch=$("#choices"), fr=$("#free");ch.innerHTML="";
- if(q.free){ch.style.display="none";fr.style.display="";fr.value="";setTimeout(()=>fr.focus(),120)}
- else{
-   fr.style.display="none";ch.style.display="grid";
-   q.o.forEach((opt,i)=>{const b=document.createElement("button");b.className="choice";b.textContent=opt[0];b.onclick=()=>{S.sel=i;document.querySelectorAll(".choice").forEach(x=>x.classList.remove("selected"));b.classList.add("selected")};ch.appendChild(b)})
- }
-}
-$("#save").onclick=()=>{
- const q=Q[S.q];let val;
- if(q.free){val=$("#free").value.trim();if(val.length<12)return toast("Напиши чуть подробнее — хотя бы одно нормальное предложение.");}
- else{if(S.sel===null)return toast("Выбери один вариант.");val=S.sel;}
- S.a[S.p][S.q]=val;$("#free").blur();$("#free").value="";$("#choices").innerHTML="";$("#qcard").style.display="none";$("#handoff").style.display="";
- if(S.p===0){$("#handoffTitle").textContent=`Теперь отвечает ${S.names[1]}`;$("#handoffText").textContent=`Предыдущий ответ скрыт. ${S.names[1]}, теперь твоя очередь ответить на тот же вопрос.`}
- else if(S.q<14){$("#handoffTitle").textContent=`Вопрос ${S.q+1} завершён`;$("#handoffText").textContent=`Оба ответа сохранены. ${S.names[0]}, теперь твоя очередь: переходим к следующему вопросу.`}
- else{$("#handoffTitle").textContent="Готово";$("#handoffText").textContent="Теперь Gemini прочитает ваши ответы по смыслу, а PARA соберёт результат."}
-};
-$("#next").onclick=()=>{if(S.p===0){S.p=1;renderQ()}else if(S.q<14){S.p=0;S.q++;renderQ()}else{startAIAnalysis()}};
-
-function optionSim(i,j,category){
- if(i===j)return 96;
- if(category==="values")return 78;
- if(category==="support")return Math.abs(i-j)===1?82:68;
- return [96,81,63,43][Math.abs(i-j)]??63;
-}
-function calc(){
- const qScores=Q.map((q,i)=>q.free?null:optionSim(S.a[0][i],S.a[1][i],q.cat));
- const c={};Object.keys(cats).forEach(k=>{const a=qScores.filter((v,i)=>v!==null&&Q[i].cat===k);c[k]=a.length?Math.round(a.reduce((s,v)=>s+v,0)/a.length):null;});
- const values=Object.values(c).filter(v=>v!==null),overall=Math.round(values.reduce((s,v)=>s+v,0)/values.length);
- const critical=["communication","trust","future","honesty","boundaries"].map(k=>c[k]).sort((a,b)=>a-b);
- const avg=a=>a.reduce((s,v)=>s+v,0)/a.length;const weak=critical.filter(v=>v<55).length;
- const risk=Math.round(Math.min(100,.7*(100-avg(critical.slice(0,3)))+.3*(100-avg(critical))+Math.min(22,weak*(weak-1)*1.5)));
- return {qScores,c,overall,risk};
-}
-
-function clampScore(v,fallback=50){
- const n=Number(v);
- return Number.isFinite(n)?Math.max(0,Math.min(100,Math.round(n))):fallback;
-}
-function redactNames(text){
- let value=String(text);S.names.forEach((name,i)=>{if(name.length<2)return;const escaped=name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");value=value.replace(new RegExp("(?<![\\p{L}])"+escaped+"(?![\\p{L}])","giu"),()=>i===0?"Person A":"Person B")});return value;
-}
-function buildAIPayload(){
- return {
-   answers: Q.map((q,i)=>({
-     id:i+1,
-     question:q.t,
-     category:q.cat,
-     type:q.free?"free":"choice",
-     personA:q.free?redactNames(S.a[0][i]||""):String(q.o[S.a[0][i]]?.[0]||""),
-     personB:q.free?redactNames(S.a[1][i]||""):String(q.o[S.a[1][i]]?.[0]||"")
-   }))
- };
-}
-function applyAIResult(ai){
- S.ai=ai;
- const local=S.local||calc();
- const aiMetrics=ai?.metrics||{};
- const merged={...local.c};
- Object.keys(merged).forEach(k=>{
-   if(aiMetrics[k]!==undefined) merged[k]=clampScore(aiMetrics[k],merged[k]);
- });
- S.r={
-   qScores:local.qScores,
-   c:merged,
-   overall:clampScore(ai?.overallCompatibility,local.overall),
-   risk:clampScore(ai?.breakupRiskIndex,local.risk)
- };
-}
-let analysisRun=0;
-const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-async function startAIAnalysis(){
- const run=++analysisRun;S.local=calc();S.r=S.local;S.ai=null;show("#analysis");
- $("#skipCouncil").hidden=true;$("#aiDot").className="aiDot";$("#aiStatusText").textContent="Читаем ваши ответы — особенно то, что вы написали сами…";
- $(".council").innerHTML='<div class="waitingOrb" aria-hidden="true">✧</div><p class="waitingCopy">За каждым ответом — своя причина.<br>Попробуем услышать обе.</p>';
- $("#pulse").style.transition="none";$("#pulse").style.width="0%";requestAnimationFrame(()=>{$("#pulse").style.transition="width 80s ease-out";$("#pulse").style.width="85%"});
- const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),172000);
- const slow=setTimeout(()=>{if(run===analysisRun)$("#aiStatusText").textContent="Собираем подробные портреты и 12 разборов. Это может занять чуть больше минуты…"},20000);
- try{
-  const res=await fetch("/api/analyze",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(buildAIPayload()),signal:controller.signal});
-  const data=await res.json();if(!res.ok||!data.metrics||!data.metricNarratives||!data.coupleSummary)throw new Error("Analysis unavailable");
-  if(run!==analysisRun)return;applyAIResult(data);$("#aiDot").className="aiDot live";$("#aiStatusText").textContent="Ваш смысловой разбор готов";
- }catch{if(run!==analysisRun)return;S.ai=null;S.r=S.local;$("#aiDot").className="aiDot fallback";$("#aiStatusText").textContent="Gemini недоступен. Резервный разбор учитывает только варианты ответов.";}
- finally{clearTimeout(timer);clearTimeout(slow);}
- if(run===analysisRun)prepareAnalysis(run);
-}
-async function prepareAnalysis(run){
- const r=S.r;const entries=Object.entries(r.c).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]);const weak=entries[0],strong=entries.at(-1);
- const cute=r.overall>=85&&r.risk<35,tense=r.risk>=65;
- const lines=S.ai?.council?.length?S.ai.council.slice(0,8):[
- {speaker:"ChatGPT",text:`🧪 Смысл текстов пока не оценён. По вариантам ближе всего «${cats[strong[0]]}».`},
- {speaker:"Grok",text:cute?"Подозрительно мило 😭 Но про тексты пока не фантазируем.":tense?"Вот тут уже не спор из-за чашки. У вас разные ожидания 😬":"То есть один способ любить на двоих не выдали? Бывает 😏"},
- {speaker:"Gemini",text:`✨ Зато в теме «${cats[strong[0]]}» проще найти общую точку.`},
- {speaker:"ChatGPT",text:`Да. А «${cats[weak[0]]}» стоит обсудить отдельно, без ярлыков.`},
- {speaker:"Grok",text:cute?"Ладно, эту милоту оставляем. Но читать мысли друг друга всё ещё нельзя 🥹":"Согласен. «Я думал, это очевидно» — ещё не договорённость."},
- {speaker:"PARA",text:"Готов резервный результат. Это начало разговора, а не прогноз вашей истории."}];
- $(".council").innerHTML="";$("#skipCouncil").hidden=false;
- const finish=()=>{if(run!==analysisRun)return;++analysisRun;renderResult();show("#results");};$("#skipCouncil").onclick=finish;
- $("#pulse").style.transition="width 13s linear";$("#pulse").style.width="100%";
- const icons={ChatGPT:"🧪",Grok:"⚡",Gemini:"✨",PARA:"♡"};
- for(const line of lines){
-  if(run!==analysisRun)return;
-  const msg=document.createElement("div");msg.className="msg show";
-  const speaker=icons[line.speaker]?line.speaker:"PARA";
-  msg.innerHTML=`<div class="avatar">${icons[speaker]}</div><div class="bubble"><div class="name">${speaker}</div><div class="councilText"><span class="typingDots"><i></i><i></i><i></i></span></div></div>`;$(".council").appendChild(msg);
-  msg.scrollIntoView({block:"nearest",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
-  await pause(450);if(run!==analysisRun)return;msg.querySelector(".councilText").textContent=personalize(line.text);
-  await pause(Math.max(1100,Math.round(12500/lines.length)-450));
- }
- finish();
-}
-
-function lifePath(date){
- const digits=date.replace(/\D/g,"").split("").map(Number);let n=digits.reduce((a,b)=>a+b,0);
- while(n>9 && ![11,22,33].includes(n)) n=String(n).split("").reduce((a,b)=>a+Number(b),0);
- return n;
-}
-function zodiac(date){
- const d=new Date(date+"T12:00:00"),m=d.getMonth()+1,day=d.getDate();
- const z=[["Козерог",1,19],["Водолей",2,18],["Рыбы",3,20],["Овен",4,19],["Телец",5,20],["Близнецы",6,20],["Рак",7,22],["Лев",8,22],["Дева",9,22],["Весы",10,22],["Скорпион",11,21],["Стрелец",12,21],["Козерог",12,31]];
- for(const [name,mm,dd] of z){if(m<mm||(m===mm&&day<=dd))return name} return "Козерог";
-}
-function numerologyCompatibility(a,b){
- const x=lifePath(a),y=lifePath(b);const diff=Math.abs((x>9?x%9:x)-(y>9?y%9:y));
- return Math.max(54,Math.min(96,92-diff*6));
-}
-function astroCompatibility(a,b){
- const z1=zodiac(a),z2=zodiac(b);
- const groups={
- "Овен":"огонь","Лев":"огонь","Стрелец":"огонь",
- "Телец":"земля","Дева":"земля","Козерог":"земля",
- "Близнецы":"воздух","Весы":"воздух","Водолей":"воздух",
- "Рак":"вода","Скорпион":"вода","Рыбы":"вода"};
- const g1=groups[z1],g2=groups[z2];
- if(g1===g2)return 88;
- const good=[["огонь","воздух"],["земля","вода"]];
- if(good.some(x=>x.includes(g1)&&x.includes(g2)))return 82;
- return 66;
-}
-function verdict(s){return s>=85?"Очень сильное совпадение":s>=70?"Хорошее совпадение":s>=55?"Есть различия. Есть и общая точка.":s>=40?"Важные темы ждут разговора":"Вы по-разному видите важные вещи";}
-function riskText(r){return r<30?"В ответах мало противоречий, которые усиливают друг друга. Ваш ресурс — замечать небольшие различия до того, как они станут обидами.":r<55?"Несколько ожиданий расходятся. Если считать их очевидными и не обсуждать, в этих местах может появляться дистанция.":r<75?"Несколько чувствительных тем накладываются друг на друга. Здесь особенно полезно выяснить, что каждый пытается защитить: близость, доверие или свободу.":"В ответах есть сочетание сильных противоречий. Оно требует внимательного разговора о границах и будущем. Высокий индекс не означает, что расставание обязательно произойдёт.";}
-const PROFILE_LABELS={needs:"Что нужно от любви",fears:"Чего боится",affection:"Как проявляет чувства",loyalty:"Что значит верность",conflict:"Что происходит в ссоре",money:"Как смотрит на деньги",closeness:"Сколько нужно близости",freedom:"Где нужна свобода",hurt:"Что ранит сильнее всего",misread:"Что можно понять неправильно"};
-function renderResult(){
- const r=S.r,ai=S.ai;const entries=Object.entries(r.c).filter(x=>x[1]!=null).sort((a,b)=>a[1]-b[1]),weak=entries[0],strong=entries.at(-1);
- $("#pairNames").textContent=S.names.join(" + ");$("#coupleType").textContent=personalize(ai?.coupleType||(r.overall>=85?"На одной волне":r.overall>=70?"Свои, но разные":"Ищущие общий язык"));
- $("#ring").style.setProperty("--score",r.overall);anim($("#score"),r.overall);$("#verdict").textContent=verdict(r.overall);
- $("#sub").textContent=`Общая совместимость по ответам. Ваша опора — ${cats[strong[0]].toLowerCase()}. Тема для разговора — ${cats[weak[0]].toLowerCase()}.`;
- $("#resultSource").textContent=ai?"Смысловой анализ Gemini · 15 вопросов · две точки зрения":"Резервный результат · только 12 вопросов с вариантами · свободные тексты не оценены";
- $("#portraitBadge").textContent=ai?"GEMINI · ПО ВАШИМ ОТВЕТАМ":"РЕЗЕРВНЫЙ РАЗБОР";
- $("#coupleSummary").textContent=personalize(ai?.coupleSummary||`Сейчас Gemini недоступен. По выбранным вариантам ваша самая сильная общая тема — «${cats[strong[0]]}». А в теме «${cats[weak[0]]}» ожидания различаются сильнее.
-
-Чтобы не приписывать вашим словам чужой смысл, PARA оставил свободные ответы без оценки. Доступные ниже портреты — ориентиры по кнопкам. Обсудите, какие из них узнаёте, а какие описывают вас не совсем точно.`);
- const h=ai?.highlights;
- const highlights=h?[["✦","Сильнейшая сторона пары",h.strongest,"wide"],["↔","Где вы понимаете друг друга без слов",h.wordless,""],["↯","Главный конфликт",h.mainConflict,""],["♡","Зелёный флаг пары",h.greenFlag,"green"],["⚑","Красный флаг пары",h.redFlag,"rose"],["01",`${S.names[0]} → ${S.names[1]}: где легко ошибиться`,h.misreadA,""],["02",`${S.names[1]} → ${S.names[0]}: где легко ошибиться`,h.misreadB,""],["↗","Кто скорее первый идёт мириться",h.reconciles,""],["∞","Кто сильнее нуждается в близости",h.needsCloseness,""],["♡","Как вы проявляете любовь",h.loveLanguages,"wide"]]:[["✦","Ваша опора",`По вариантам сильнее всего совпали ожидания в теме «${cats[strong[0]]}». Это ещё не оценка всей истории отношений.`,""],["↔","Тема для разговора",`Обсудите тему «${cats[weak[0]]}»: чего каждому хочется и что было бы удобным компромиссом?`,""]];
- $("#highlights").innerHTML=highlights.map(([icon,title,text,cls])=>`<article class="insight ${cls} reveal"><span class="insightIcon" aria-hidden="true">${icon}</span><h3>${escapeHTML(title)}</h3><p>${safeAI(text)}</p></article>`).join("");
- $("#peoplePortraits").innerHTML=S.names.map((name,i)=>{
- const profile=ai?.profiles?.[i===0?"personA":"personB"];
- const intro=ai?.[i===0?"personAProfile":"personBProfile"]||optionProfile("values",i)+" "+optionProfile("closeness",i);
- const fallback={needs:optionProfile("values",i),fears:"Без смыслового анализа нельзя точно выделить страхи из вашего текста.",affection:"Предпочтения в получении поддержки не всегда совпадают со способом проявлять любовь. Это стоит уточнить друг у друга.",loyalty:optionProfile("trust",i),conflict:optionProfile("communication",i),money:optionProfile("money",i),closeness:optionProfile("closeness",i),freedom:boundaryProfile(i),hurt:"Ваш свободный ответ остаётся без оценки: Gemini сейчас недоступен.",misread:"Спросите партнёра, какое ваше действие труднее всего правильно понять. Не угадывайте за него."};
- return `<article class="personPortrait"><div class="personMonogram" aria-hidden="true">${escapeHTML([...name][0])}</div><span class="chapterLabel">ПОРТРЕТ ${i+1}</span><h3>${escapeHTML(name)}</h3><p class="profileIntro">${safeAI(intro)}</p><div class="profileDetails">${Object.entries(PROFILE_LABELS).map(([key,label])=>`<details><summary>${label}</summary><p>${safeAI(profile?.[key]||fallback[key])}</p></details>`).join("")}</div></article>`;
- }).join("");
- $("#metrics").innerHTML=Object.entries(r.c).map(([k,v],i)=>`<button class="metric" data-metric="${k}" aria-label="Подробнее: ${cats[k]} ${v==null?'без оценки':v+'%'}"><div class="metricIndex">${String(i+1).padStart(2,'0')} <span>↗</span></div><div class="metricTop"><span class="mname">${cats[k]}</span><span class="mval">${v==null?'—':v+'<small>%</small>'}</span></div><div class="mbar"><div class="mfill" style="width:${v??0}%"></div></div><p class="metricCaption">${v==null?'Нужен смысловой анализ':scoreMeaning(v)}</p></button>`).join("");
- $("#metrics").querySelectorAll(".metric").forEach(card=>card.onclick=()=>openMetric(card.dataset.metric,r.c[card.dataset.metric]));
- const textRows=ai?.textSignals?[["Ваша идеальная жизнь",ai.textSignals.future],["То, что больнее всего",ai.textSignals.hurt],["Ваша точка невозврата",ai.textSignals.separation]]:[["Тексты не оценены","Gemini сейчас недоступен. PARA не сравнивает эти ответы по ключевым словам. Прочитайте свои ответы друг другу и обсудите не только желания, но и их причины."]];
- $("#textInsights").innerHTML=textRows.map(([title,text])=>`<article class="textInsight"><h3>${title}</h3><p>${safeAI(text)}</p></article>`).join("");
- anim($("#risk"),r.risk);$("#riskFill").style.width=r.risk+"%";$("#riskText").textContent=personalize(ai?.highlights?.breakingPoint||riskText(r.risk));
- $("#riskZones").innerHTML=["trust","honesty","communication","boundaries","future","risk"].map(k=>`<span>${cats[k]} <b>${r.c[k]==null?'—':r.c[k]+'%'}</b></span>`).join("");
- $("#riskMethod").textContent=ai?"Индекс учитывает слабейшие важные зоны, их сочетание и противоречия в свободных ответах. "+personalize(ai.textSignals?.explanation||""):"Предварительный индекс только по вариантам. Свободные ответы не учтены, поэтому полной оценки риска сейчас нет.";
- $("#lockedRiskTitle").textContent=`Почему именно ${r.risk}%?`;
- $("#lockedRiskSub").textContent=ai?"За цифрой — ваши ожидания, недосказанность и возможный сценарий отдаления. В полном разборе — как заметить его раньше и что обсудить вдвоём.":"Сейчас доступен резервный результат. Для полного персонального разбора нужен смысловой анализ ваших текстов.";
- $("#paymentNotice").hidden=true;
- const lp1=lifePath(S.dates[0]),lp2=lifePath(S.dates[1]);
- $("#mystic").innerHTML=`<div class="mysticCard"><small>${escapeHTML(S.names[0])}</small><div class="big">${zodiac(S.dates[0])}</div><small>Число жизненного пути ${lp1}</small></div><div class="mysticCard"><small>${escapeHTML(S.names[1])}</small><div class="big">${zodiac(S.dates[1])}</div><small>Число жизненного пути ${lp2}</small></div><div class="mysticCard"><small>Астросовпадение</small><div class="big">${astroCompatibility(...S.dates)}%</div><small>Игровая шкала</small></div><div class="mysticCard"><small>Нумеросовпадение</small><div class="big">${numerologyCompatibility(...S.dates)}%</div><small>Игровая шкала</small></div>`;
- const relationship=(lp1+lp2-1)%9+1;
- const energies=["Новые начала","Тихое притяжение","Общий смех","Дом, в который хочется","Любопытство к миру","Тепло и забота","Глубина и открытия","Смелые планы","Большое сердце"];
- $("#symbolStory").innerHTML=`<span aria-hidden="true">✧</span><div><small>СИМВОЛИЧЕСКАЯ ЭНЕРГИЯ ПАРЫ · ЧИСЛО ${relationship}</small><h3>${energies[relationship-1]}</h3><p>Красивый образ для вашей истории — не характеристика отношений по ответам.</p></div>`;
- const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("arrived");observer.unobserve(e.target)}}),{threshold:.06});document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
-}
-function anim(el,to){if(matchMedia("(prefers-reduced-motion: reduce)").matches){el.textContent=to;return;}let st=performance.now();function f(n){let p=Math.min(1,(n-st)/650);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
-$("#pay").onclick=()=>{$("#paymentNotice").hidden=false;$("#paymentNotice").scrollIntoView({block:"nearest",behavior:"smooth"})};
-$("#metricClose").onclick=closeMetric;
-$("#metricModal").onclick=e=>{if(e.target===$("#metricModal"))closeMetric()};
-document.addEventListener("keydown",e=>{if(!$("#metricModal").classList.contains("open"))return;if(e.key==="Escape")closeMetric();if(e.key==="Tab"){e.preventDefault();$("#metricClose").focus();}});
-["#d1","#d2"].forEach(id=>{$(id).max=new Date().toISOString().slice(0,10);$(id).min="1900-01-01"});
-$("#restart").onclick=()=>location.reload();
-$("#copy").onclick=async()=>{const r=S.r,txt=`PARA AI\n${S.names[0]} + ${S.names[1]}\nСовместимость: ${r.overall}%\nРиск расставания: ${r.risk}%`;try{await navigator.clipboard.writeText(txt);toast("Скопировано")}catch{toast("Не удалось скопировать")}}
-</script>
+<script src="/questionnaire.js"></script>
+<script src="/app.js"></script>
 </body>
 </html>

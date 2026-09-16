@@ -1,45 +1,44 @@
-# PARA AI
+# PARA AI · v7
 
-Existing production project: `Masek463636/para-ai` → Vercel `para-ai`.
+Existing repository `Masek463636/para-ai` and Vercel project `para-ai`. Production: https://para-ai-bay.vercel.app/
 
-## Run and verify
+## Structure
 
-Node 20+ (production currently Node 24). No frontend build or dependencies.
+- `index.html`, `result.css`, `app.js`: existing app, questionnaire handoff, result journey, Coach and session persistence.
+- `questionnaire.js`: shared canonical 18-question schema, multi-signal scoring and duration calculation.
+- `lib/analysis.js`: preserved Gemini model, deep response schema, prompt and validation.
+- `api/analyze.js`: three passes (base + two parallel six-metric passes). With `stream:true`, NDJSON emits `base` before details, then `complete` or `partial`. Without it, JSON compatibility remains for v7 callers.
+- `api/coach.js`, `lib/access.js`: one free contextual response, signed report binding, bounded in-memory request and replay controls.
+- `docs/questionnaire-audit.md`: decision for every previous question.
 
-- `npm test`: API contract, error handling, risk calibration, privacy, safe rendering and local fallback checks.
-- `npx vercel dev`: full local app with a privately configured `GEMINI_API_KEY`.
-- Static hosting alone can exercise the questionnaire and automatic fallback.
+## Analysis and access
 
-## Files
+Model remains `gemini-3.1-flash-lite`. `GEMINI_API_KEY` stays in Vercel, sent in the upstream header only. No client keys. Logs contain stage/status markers, never answers, generated reports or upstream bodies. Payloads accept only canonical questions, validated numeric selections, 3 bounded free texts and relationship duration in months. Names and birthdates stay in browser. Exact names and supported Russian case variants are redacted from free text and Coach questions. Arbitrary identifiers typed by users cannot be guaranteed anonymous.
 
-- `index.html`: existing questionnaire, state, analysis orchestration and result journey.
-- `result.css`: mobile-first result, portraits, metric sheet, Council and paywall styles.
-- `api/analyze.js`: server-side Gemini request, schema validation and index calculation.
-- `vercel.json`: no-store API headers and 180-second maximum function duration.
-- `tests/analyze.test.cjs`: dependency-free regression checks with mocked upstream responses.
+Each of 12 metrics receives 3+ scenario signals. Local fallback is deterministic and never word-scores free answers. Gemini receives that baseline and interprets texts semantically. The existing risk index still combines six critical dimensions, text severity and a penalty for several weak zones. Numerology remains separate entertainment.
 
-## AI and privacy
+Response v7 adds archetype (five original metaphor families), superpower, riskZone, five-step possible cycle with two exit actions and structured two-way misunderstandings. It preserves detailed portraits, twelve metric narratives, premium, textSignals and Council. Council is a generated scene, not separate calls to ChatGPT or Grok.
 
-The existing model remains `gemini-3.1-flash-lite`. `GEMINI_API_KEY` stays in Vercel environment variables and is sent upstream only in a server request header. Never put it in the client, repository or logs. Logs contain status and completion markers, not answers or upstream bodies.
+Free: compatibility, archetype, superpower, green flag, portrait introductions and love needs, twelve indices, previews of misunderstandings/cycle/metrics, breakup index, entertainment and one Coach answer. Closed: deep portraits, full cycle and misunderstandings, metric narratives, risk explanations, individual unspoken expectations/fears, distance scenario, conversation and seven-day plan. Blur contains actual Gemini text, marked inert/aria-hidden to avoid reading locked prose through screen readers.
 
-The frontend sends the 15 question texts and both answer texts as Person A/B. It does not send name/date fields. Exact occurrences of entered names in free answers are replaced; arbitrary personal data typed into answers cannot be guaranteed anonymous. The form explains this. All AI output is escaped and Person A/B is replaced at rendering time with local names. Optional grammatical case markers such as `[Person A:gen]` are resolved locally for supported Russian name endings; unknown names are preserved.
+## Coach, limits and payments
 
-Questionnaire content is untrusted data, never model instructions. Schema validation rejects incomplete outputs. Upstream failures and timeouts produce a safe 503 response; the client displays a clearly labelled fallback. Fallback uses only selected choices, gives no vulnerability score and does not compare free text by keyword similarity.
+A signed 24-hour capability binds canonical answers, duration and the entire report. Modified reports, fabricated grants and altered limits are rejected. Same-question retries return cached output; another question is blocked. Failed generations release the slot. Model data cannot set roles or inject system messages; all user content is explicitly untrusted. Coach is instructed to acknowledge insufficient evidence and never infer infidelity, diagnoses or hidden events.
 
-## Analysis contract
+**Current limitation:** counters and idempotency cache live in the warm function instance. They mitigate accidental repeat calls and simple abuse but do not enforce a global quota across cold starts/regions. Before paid launch, replace the ledger with an atomic persistent database and verify purchase entitlements. Planned product quota is 1 free + 8 paid messages per report, but no paid entitlement can currently be issued through this app.
 
-Generation uses one base request and two parallel requests for six metric narratives each, all with the same existing Gemini model and server-only key. A shared timeout and abort signal bound the three calls.
+**No payment processing.** The paywall is a prototype: full generated content still reaches the browser. CSS blur is not secure access control. Do not accept money before moving protected content and entitlements server-side. The UI honestly says purchases are unavailable.
 
-Version 6 includes two profiles with ten themes each; twelve metric narratives with seven sections each; couple story and highlights; semantic analysis of the three free-response pairs; eleven premium sections including a seven-day plan; six or seven Council lines. Council is a Gemini-generated scene with characters, not separate ChatGPT/Grok calls.
+## Saving and failure modes
 
-All metric scores represent compatibility, including the legacy `risk` key which means vulnerability compatibility. Scoring bands: 85–100 / 70–84 / 55–69 / 40–54 / 0–39. These are product indices, not validated psychometric measures.
+Report, canonical questionnaire inputs, local names/dates, anonymous analysis and Coach response are saved in `sessionStorage` in the current tab, expiring after 24 hours. Refresh restores them; no email/account is required. Closing the tab normally removes session data (browser session restoration can retain it). Delete/restart clears the saved report. If storage is denied the UI says so. If a refresh interrupts details, the saved base remains with an explicit retry option; no paid content is fabricated. Failed Coach requests keep the free attempt available.
 
-Overall compatibility is a weighted average: future and vulnerability have weight 1.5, other metrics 1. The breakup index considers trust, honesty, communication, boundaries, future and vulnerability. Formula: 55% of the deficit in the weakest three critical zones + 25% of the deficit in all six + 20% semantic-text severity, plus a capped interaction penalty for multiple scores under 55. Final score is clamped to 0–100. Numerology and birthdays do not enter either formula. Freeform narratives are instructed not to invent index values.
+## Verification
 
-## Premium
+`npm test` tests signal coverage, stability, cross-loading, complementary support, duration, canonical payloads, three-pass streaming, fallback, missing/upstream keys, structural contracts, risk response, signed Coach context/replay/failure recovery, personalization/redaction, safe HTML, real blur content and storage deletion.
 
-The $1.99 paywall is a UI preparation only. No payment service, checkout, charge, subscription or access entitlement exists. Its button explains availability. Gemini generates all premium fields, but they are not rendered as an unlocked product. The previous `?premium=1` shortcut is removed. Premium fields still travel in the API response: this is **not** a secure commercial paywall. Before taking payments, keep protected content server-side and verify an actual purchase entitlement.
+`node --check app.js`, `node --check api/analyze.js`, `node --check api/coach.js`.
 
-## Release checks
+`/tests/viewport.html` is a noindex manual QA harness displaying the real app in an iframe at 375/390/430 CSS pixels. It does not inject results, access state or mock APIs. This tests responsive viewport rules; it is not iOS/Android emulation. Use real phones to verify OS keyboards and browser-specific behavior.
 
-Before pushing to main, run `npm test`, `node --check api/analyze.js`, syntax-check the inline client script, and inspect the result at phone widths, long names/text, dialog scrolling/focus, Council, fallback and paywall. After push, verify the Vercel production deployment SHA and READY status, complete a real synthetic questionnaire, and inspect that deployment's runtime logs for `PARA analysis complete` or failure markers.
+Release: match production deployment SHA/READY, complete synthetic questionnaire, verify base arrives before complete, read metric previews and real Coach answer, refresh, inspect runtime logs for `PARA analysis complete` / `PARA coach complete` and check runtime errors.

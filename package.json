@@ -1,6 +1,6 @@
 {
-  "name": "para-ai-v5",
-  "version": "6.0.0",
+  "name": "para-ai",
+  "version": "7.0.0",
   "private": true,
   "engines": {
     "node": ">=20"

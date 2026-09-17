@@ -1,11 +1,20 @@
 {
   "name": "para-ai",
-  "version": "7.0.0",
+  "version": "8.0.0",
   "private": true,
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
-    "test": "node --test tests/*.test.cjs"
+    "test": "node --test tests/*.test.cjs",
+    "check": "node scripts/check.js",
+    "db:migrate": "node --env-file=.env.local scripts/migrate.js",
+    "db:cleanup": "node --env-file=.env.local scripts/cleanup.js",
+    "dev": "node --env-file=.env.local scripts/dev.js",
+    "build": "node scripts/build.js"
+  },
+  "dependencies": {
+    "@libsql/client": "0.18.0",
+    "stripe": "22.6.2"
   }
 }

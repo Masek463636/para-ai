@@ -1,0 +1,3 @@
+'use strict';
+const S=require('../lib/security'),R=require('../lib/reports');
+module.exports=async(req,res)=>{S.headers(res);try{if(req.method!=='GET')throw new S.HttpError(405,'Метод не поддерживается.');if(!R.storageReady())throw new S.HttpError(503,'Полный отчёт пока недоступен.');const row=await R.owned(req.query?.id,S.session(req,res));if(!row.premium_unlocked)throw new S.HttpError(402,'Полный отчёт откроется после подтверждения оплаты.');if(row.status!=='complete')throw new S.HttpError(409,'Дождитесь полного анализа.');return S.json(res,200,{...S.open(row.content_cipher),reportId:row.id,status:'complete',storageAvailable:true,expiresAt:row.expires_at,...R.entitlement(row)});}catch(e){S.fail(res,e);}};

@@ -1,0 +1,2 @@
+'use strict';
+const fs=require('node:fs'),path=require('node:path');const target=path.resolve('public');fs.mkdirSync(target,{recursive:true});for(const file of ['index.html','app.js','questionnaire.js','result.css','admin.html','admin.js','admin.css','tests/viewport.html']){const to=path.join(target,file);fs.mkdirSync(path.dirname(to),{recursive:true});fs.copyFileSync(file,to);}console.log('Static assets ready. Server code, docs and tests are not public assets.');

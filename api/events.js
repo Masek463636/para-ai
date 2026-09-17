@@ -1,0 +1,3 @@
+'use strict';
+const S=require('../lib/security'),db=require('../lib/db'),R=require('../lib/reports'),E=require('../lib/events');
+module.exports=async(req,res)=>{try{S.post(req,res);const owner=S.session(req,res,true),name=req.body?.event;if(!E.clientEvents.has(name))throw new S.HttpError(400,'Неизвестное событие.');if(!db.configured())return S.json(res,202,{recorded:false});if(!await R.rate(owner,'events',80,60000))throw new S.HttpError(429,'Повторите позже.');const entity=S.UUID.test(req.body?.reportId||'')?req.body.reportId:'';if(entity)await R.owned(entity,owner);await E.record(owner,name,entity);S.json(res,200,{recorded:true});}catch(e){S.fail(res,e);}};
